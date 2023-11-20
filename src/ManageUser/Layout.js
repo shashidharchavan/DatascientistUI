@@ -47,7 +47,7 @@ export default function Layout() {
                 style={{ maxHeight: '100px' }}
                 navbarScroll
               >
-                <Nav.Link href="/NewFeature">Add Feature</Nav.Link>
+                <Nav.Link href="/newfeature">Add Feature</Nav.Link>
                 <Nav.Link href="#action2">Upload Feature</Nav.Link>
                 <Nav.Link href="#action1">Favourites</Nav.Link>
                 <Nav.Link href="/">My Feature</Nav.Link>
