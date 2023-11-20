@@ -35,7 +35,8 @@ export default function Layout() {
     setSearchTerm(event.target.value);
   }
   return (
-    <BrowserRouter>
+
+    <BrowserRouter basename="/ManageUser">
       <>
         <Navbar expand="lg" className="bg-body-tertiary">
           <Container fluid>
@@ -47,7 +48,7 @@ export default function Layout() {
                 style={{ maxHeight: '100px' }}
                 navbarScroll
               >
-                <Nav.Link href="/newfeature">Add Feature</Nav.Link>
+                <Nav.Link href="/NewFeature">Add Feature</Nav.Link>
                 <Nav.Link href="#action2">Upload Feature</Nav.Link>
                 <Nav.Link href="#action1">Favourites</Nav.Link>
                 <Nav.Link href="/">My Feature</Nav.Link>
