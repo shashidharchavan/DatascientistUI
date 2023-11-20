@@ -48,11 +48,11 @@ export default function Layout() {
                 style={{ maxHeight: '100px' }}
                 navbarScroll
               >
-                <Nav.Link href="ManageUser/NewFeature">Add Feature</Nav.Link>
+                <Nav.Link href="./NewFeature">Add Feature</Nav.Link>
                 <Nav.Link href="#action2">Upload Feature</Nav.Link>
                 <Nav.Link href="#action1">Favourites</Nav.Link>
                 <Nav.Link href="/">My Feature</Nav.Link>
-                <Nav.Link href="ManageUser/SearchUser">Custom Search</Nav.Link>
+                <Nav.Link href="./SearchUser">Custom Search</Nav.Link>
 
 
               </Nav>
@@ -78,9 +78,9 @@ export default function Layout() {
 
       <Routes>
         <Route path='/' element={<FeatureHome></FeatureHome>} ></Route>
-        <Route path='/searchuser' element={<SearchUser ></SearchUser>} ></Route>
+        <Route path='./searchuser' element={<SearchUser ></SearchUser>} ></Route>
         <Route path='/searchresult' element={<SearchResult ></SearchResult>} ></Route>
-        <Route path='/newfeature' element={<NewFeature ></NewFeature>} ></Route>
+        <Route path='./newfeature' element={<NewFeature ></NewFeature>} ></Route>
         <Route path='viewfeature' element={<ViewFeature></ViewFeature>} ></Route>
 
       </Routes>
