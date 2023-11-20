@@ -10,7 +10,7 @@ import "bootstrap/dist/js/bootstrap.min.js";
 
 import Layout from './ManageUser/Layout';
 // import SearchDisplay from './ManageUser/SearchDisplay';
-import SearchUser from './ManageUser/SearchUser';
+//import SearchUser from './ManageUser/SearchUser';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
