@@ -36,7 +36,7 @@ export default function Layout() {
   }
   return (
 
-    <BrowserRouter basename="/ManageUser">
+    <BrowserRouter>
       <>
         <Navbar expand="lg" className="bg-body-tertiary">
           <Container fluid>
