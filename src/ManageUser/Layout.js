@@ -79,7 +79,7 @@ export default function Layout() {
         <Route path='/' element={<FeatureHome></FeatureHome>} ></Route>
         <Route path='/searchuser' element={<SearchUser ></SearchUser>} ></Route>
         <Route path='/searchresult' element={<SearchResult ></SearchResult>} ></Route>
-        <Route path='newfeature' element={<NewFeature ></NewFeature>} ></Route>
+        <Route path='/newfeature' element={<NewFeature ></NewFeature>} ></Route>
         <Route path='viewfeature' element={<ViewFeature></ViewFeature>} ></Route>
 
       </Routes>
