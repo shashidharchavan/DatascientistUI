@@ -5,6 +5,8 @@ import ViewFeature from "./ViewFeature"
 import SearchUser from './SearchUser';
 import NewFeature from './NewFeature';
 import axios from 'axios';
+import { AppConfigurationClient } from "@azure/app-configuration";
+
 
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
@@ -20,6 +22,55 @@ import SearchResult from './SearchResult';
   
 export default function Layout() {
 
+  const [featureFlags, setFeatureFlags]=useState({
+        isAdminOptionsEnabled:false,
+        addFeatureOption:false,
+        updateFeatureOption:false,
+        favouritesOption:false,
+        myFeaturesOption:false,
+       });
+       
+    
+        const fetchFeatureFlags = async () => {
+          try {
+            const isAdminOptionsEnabledResponse = await configService.getConfigurationSetting({
+              key: '.appconfig.featureflag/isAdminOptionsEnabled',
+            });
+           
+            const addFeatureOptionResponse = await configService.getConfigurationSetting({
+              key: '.appconfig.featureflag/addFeatureOption',
+            });
+            const updateFeatureOptionResponse = await configService.getConfigurationSetting({
+              key: '.appconfig.featureflag/updateFeatureOption',
+            });
+            const favouritesOptionResponse = await configService.getConfigurationSetting({
+              key: '.appconfig.featureflag/favouritesOption',
+            });
+            const myFeaturesOptionResponse = await configService.getConfigurationSetting({
+              key: '.appconfig.featureflag/myFeaturesOption',
+            });
+    
+            setFeatureFlags({
+              isAdminOptionsEnabled: JSON.parse(isAdminOptionsEnabledResponse?.value)?.enabled === true,
+              addFeatureOption: JSON.parse(addFeatureOptionResponse?.value)?.enabled === true,
+              updateFeatureOption: JSON.parse(updateFeatureOptionResponse?.value)?.enabled === true,
+              favouritesOption: JSON.parse(favouritesOptionResponse?.value)?.enabled === true,
+              myFeaturesOption: JSON.parse(myFeaturesOptionResponse?.value)?.enabled === true,
+            });
+          } catch (error) {
+            console.error('Error fetching feature flags:', error);
+          }
+        };
+        useEffect(() => {
+    
+        fetchFeatureFlags();
+        
+         // Polling every 5 seconds (adjust as needed)
+         const pollingInterval = setInterval(fetchFeatureFlags, 1000);
+    
+         return () => clearInterval(pollingInterval);
+    
+      }, []);
 
   const [searchResults, setSearchResults] = useState([]);  
   const [searchTerm, setSearchTerm] = useState('');
@@ -48,12 +99,36 @@ export default function Layout() {
                 style={{ maxHeight: '100px' }}
                 navbarScroll
               >
-                <Nav.Link href="./NewFeature">Add Feature</Nav.Link>
-                <Nav.Link href="#action2">Upload Feature</Nav.Link>
-                <Nav.Link href="#action1">Favourites</Nav.Link>
-                <Nav.Link href="/">My Feature</Nav.Link>
-                <Nav.Link href="./SearchUser">Custom Search</Nav.Link>
 
+            {featureFlags.addFeatureOption ?(
+                <Nav.Link href="./NewFeature">Add Feature</Nav.Link>
+                  ):(
+                    <p></p>
+                 )}
+
+            {featureFlags.updateFeatureOption ?(
+                <Nav.Link href="#action2">Upload Feature</Nav.Link>
+               ):(
+                    <p></p>
+                 )}
+
+            {featureFlags.favouritesOption ?(
+                <Nav.Link href="#action1">Favourites</Nav.Link>
+               ):(
+                    <p></p>
+                 )}
+
+          {featureFlags.myFeaturesOption ?(
+                <Nav.Link href="/">My Feature</Nav.Link>
+             ):(
+                    <p></p>
+                 )}
+
+          {featureFlags.isAdminOptionsEnabled ?(
+                <Nav.Link href="./SearchUser">Custom Search</Nav.Link>
+            ):(
+                    <p></p>
+                 )}
 
               </Nav>
               <Form className="d-flex">
